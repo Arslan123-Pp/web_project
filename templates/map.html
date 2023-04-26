@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>{{ town }}</h3>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+    <p>
+        {{ form.town.label }}<br>
+        {{ form.town(class="form-control") }}<br>
+        {% for error in form.town.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+        {% endfor %}
+        {{message}}
+    </p>
+    <div class="buttons">
+        <p>{{ form.submit(type="submit", class="btn btn-warning") }}</p>
+        <button type="button"
+            class="btn btn-warning"
+            data-toggle="modal"
+            data-target="#exampleModal">
+            Подсказка
+        </button>
+        <div class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img class="img_map" id="image" src="/static/img/map.png"
+                            alt="Click on button" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">
+                            Close
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity=
+                "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous">
+        </script>
+        <script src=
+                "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity=
+                "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous">
+        </script>
+        <script src=
+                "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity=
+                "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous">
+        </script>
+    </div>
+</form>
+{% endblock %}

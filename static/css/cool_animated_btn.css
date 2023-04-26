@@ -1,0 +1,49 @@
+.buttons {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.button2 {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  background: #85746e;
+  box-shadow: 0 4px 8px 0 rgba(39, 153, 214, 0.35);
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+.button2:hover {
+  background: #e8d7cc;
+  box-shadow: 0 4px 16px 0 rgba(39, 153, 214, 0.25);
+  border-radius: 20px;
+}
+
+.header {
+  color: #7cc1e6;
+  box-shadow: 0 4px 16px 0 rgba(39, 153, 214, 0.25);
+}
+
+body {
+  background-color: #f5f3f2;
+}
+
+.text {
+  margin: 20px;
+}
+
+.img {
+  margin: 20px;
+  width: 600px;
+  height: 500px
+  display: flex;
+  justify-content: center;
+}
+
+.img_map {
+  width: 400px;
+  height: 350px;
+}
