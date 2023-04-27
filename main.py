@@ -17,14 +17,7 @@ def load_user():
     pass
 
 
-@app.route('/base')
-def base():
-    param = {}
-    param['title'] = 'Towns game'
-    param['in_game'] = 0
-    return render_template('base.html', **param)
-
-
+# создание обработчика меню, там находится информация об игре, регистарация, таблица лидеров и сам запуск игры
 @app.route('/')
 @app.route('/menu')
 def menu():
@@ -34,6 +27,7 @@ def menu():
     return render_template('menu.html', **param)
 
 
+# создание обработчика игры, там находится сама игра в города
 @app.route('/game_town', methods=['GET', 'POST'])
 def game_town():
     global town, bot_town
@@ -46,11 +40,13 @@ def game_town():
         town = get_random_town(town)
     do_map_file(bot_town)
     if form.validate_on_submit():
+        # если пользователь нажал кнопку 'подтвердить', то обработчик проверяет, проходит ли под условие игры
         if bot_town[-1] != form.town.data.strip()[0].lower():
             return render_template('map.html', **param,
                                    form=form,
                                    message="Название города не подходит условию")
         town = form.town.data
+        form.town.data = ''
         bot_town = 'Омск'
         param['town'] = bot_town
         do_map_file(bot_town)

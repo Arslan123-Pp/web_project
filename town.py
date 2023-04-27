@@ -2,6 +2,7 @@ import random
 import requests
 
 
+# функция отвечает за получение координат определенного города
 def get_spn(json_response):
     try:
         crds = \
@@ -15,6 +16,7 @@ def get_spn(json_response):
         return ['1', '1']
 
 
+# функция отвечает за создание request города
 def get_response(town):
     toponym_to_find = town
     geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
@@ -41,6 +43,7 @@ def get_response(town):
     return requests.get(map_api_server, params=map_params)
 
 
+# функция отвечает за создание png файла определенного города
 def do_map_file(town):
     response = get_response(town)
     map_file = "static/img/map.png"
@@ -49,6 +52,7 @@ def do_map_file(town):
     return map_file
 
 
+# функция отвечает за получение случайного города из списка
 def get_random_town(last_town):
     with open('towns.txt', 'r', encoding='utf-8') as f:
         lst_towns = [town.strip() for town in f.readlines()]
