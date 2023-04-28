@@ -4,6 +4,7 @@ from data import db_session
 from town import get_random_town, do_map_file
 from data.get_object import GetTownForm
 from users import User, LoginForm
+from forms.user import RegisterForm
 
 
 app = Flask(__name__)
@@ -15,8 +16,10 @@ bot_town = 'Москва'
 
 
 @login_manager.user_loader
-def load_user():
-    pass
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
+
 
 
 # создание обработчика меню, там находится информация об игре, регистарация, таблица лидеров и сам запуск игры
