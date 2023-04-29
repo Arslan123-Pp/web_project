@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, abort
+from flask import Flask, render_template, redirect
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from town import get_random_town, do_map_file, get_town_usl_word, clear_selected_towns, check_town_in_selected_list
 from town import check_town_in_list, put_in_file_town, get_last_letter
@@ -156,4 +156,4 @@ def table_records():
 
 if __name__ == '__main__':
     db_session.global_init("db/users.db")
-    app.run(port=8000, host='127.0.0.1')
+    app.run(port=5000, host='127.0.0.1')
