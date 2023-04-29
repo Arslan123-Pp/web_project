@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 align="center">Таблица Рекордов</h1>
+{% if record != -1 %}
+    <h2>Ваш рекорд: {{ record }}</h2>
+{% endif %}
+<h2>Топ 10 пользователей:</h2>
+{% for item in users%}
+<div class="col-md6 border rounded">
+    <h2>{{item.record}}</h2>
+    <div>
+        Пользователь - {{item.nickname}}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

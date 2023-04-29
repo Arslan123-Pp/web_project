@@ -17,15 +17,19 @@
             <a class="btn btn-secondary " href="/menu">Закончить игру</a>
         {% else %}
             <h4 class="nav-link">Towns game</h4>
+            {% if in_game == 2 %}
+                <a class="btn btn-secondary " href="/menu">Вернуться в меню</a>
+            {% else %}
+                <a class="btn btn-secondary " href="/table_records">Таблица лидеров</a>
+            {% endif %}
             {% if current_user.is_authenticated %}
-                <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+                <a class="navbar-brand" href="/logout">{{ current_user.nickname }}</a>
             {% else %}
                 <p>
-                    <a class="btn btn-secondary " href="/table_records">Таблица лидеров</a>
                     <a class="btn btn-secondary " href="/register">Зарегистрироваться</a>
                     <a class="btn btn-secondary " href="/login">Войти</a>
                 </p>
-        {% endif %}
+            {% endif %}
         {% endif %}
     </nav>
 </header>
