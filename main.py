@@ -139,6 +139,7 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+
 # таблица рекордов
 @app.route("/table_records")
 def table_records():
