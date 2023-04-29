@@ -9,8 +9,8 @@ def get_spn(json_response):
             json_response['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']
         lc = crds['boundedBy']['Envelope']['lowerCorner'].split()
         uc = crds['boundedBy']['Envelope']['upperCorner'].split()
-        x = str(abs(float(uc[0]) - float(lc[0])) / 70)
-        y = str(abs(float(uc[1]) - float(lc[1])) / 70)
+        x = str(abs(float(uc[0]) - float(lc[0])) / 30)
+        y = str(abs(float(uc[1]) - float(lc[1])) / 30)
         return [x, y]
     except Exception:
         return ['1', '1']
