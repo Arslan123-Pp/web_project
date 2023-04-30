@@ -18,36 +18,40 @@ def get_spn(json_response):
 
 # функция отвечает за создание request города
 def get_response(town):
-    toponym_to_find = town
-    geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
-    geocoder_params = {
-        "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
-        "geocode": toponym_to_find,
-        "format": "json"}
-    response = requests.get(geocoder_api_server, params=geocoder_params)
+    try:
+        toponym_to_find = town
+        geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
+        geocoder_params = {
+            "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+            "geocode": toponym_to_find,
+            "format": "json"}
+        response = requests.get(geocoder_api_server, params=geocoder_params)
 
-    if not response:
+        if not response:
+            return None
+        json_response = response.json()
+        toponym = json_response["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
+        toponym_coodrinates = toponym["Point"]["pos"]
+        toponym_longitude, toponym_lattitude = toponym_coodrinates.split(" ")
+        spn = get_spn(json_response)
+        map_params = {
+            "ll": ",".join([toponym_longitude, toponym_lattitude]),
+            "spn": ",".join(spn),
+            "l": "map"
+        }
+        map_api_server = "http://static-maps.yandex.ru/1.x/"
+        return requests.get(map_api_server, params=map_params)
+    except Exception:
         return None
-    json_response = response.json()
-    toponym = json_response["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
-    toponym_coodrinates = toponym["Point"]["pos"]
-    toponym_longitude, toponym_lattitude = toponym_coodrinates.split(" ")
-    spn = get_spn(json_response)
-    map_params = {
-        "ll": ",".join([toponym_longitude, toponym_lattitude]),
-        "spn": ",".join(spn),
-        "l": "map"
-    }
-    map_api_server = "http://static-maps.yandex.ru/1.x/"
-    return requests.get(map_api_server, params=map_params)
 
 
 # функция отвечает за создание png файла определенного города
 def do_map_file(town):
     response = get_response(town)
     map_file = "static/img/map.png"
-    with open(map_file, "wb") as file:
-        file.write(response.content)
+    if response is not None:
+        with open(map_file, "wb") as file:
+            file.write(response.content)
     return map_file
 
 
